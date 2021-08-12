@@ -9,7 +9,6 @@ namespace PracticeAssessment4
         public string Name;
         public Status Status;
         public List<int> Scores;
-        public char Grade;
         public Student(string _Name, Status _Status, List<int> _Scores)
         {
             Name = _Name;
@@ -22,12 +21,11 @@ namespace PracticeAssessment4
             int sumScore = 0;
             for (int i = 0; i < _Scores.Count; i++) sumScore += _Scores[i];
             decimal meanScore = sumScore / _Scores.Count;
-            if (meanScore >= 90) Grade = 'A';
-            else if (meanScore >= 80) Grade = 'B';
-            else if (meanScore >= 70) Grade = 'C';
-            else if (meanScore >= 60) Grade = 'D';
-            else Grade = 'E';
-            return Grade;
+            if (meanScore >= 90) return 'A';
+            else if (meanScore >= 80) return 'B';
+            else if (meanScore >= 70) return 'C';
+            else if (meanScore >= 60) return 'D';
+            else return 'E';
         }        
         public static void ListAllStudents(List<Student> _AllStudents)
         {
@@ -52,15 +50,14 @@ namespace PracticeAssessment4
             int performanceTally = 0;
             foreach (Student student in MyStudents)
             {
-                if (student.Grade == 'A') performanceTally += 10;
-                else if (student.Grade == 'B') performanceTally += 9;
-                else if (student.Grade == 'C') performanceTally += 8;
-                else if (student.Grade == 'D') performanceTally += 7;
+                if (student.GetGrade(Scores) == 'A') performanceTally += 10;
+                else if (student.GetGrade(Scores) == 'B') performanceTally += 9;
+                else if (student.GetGrade(Scores) == 'C') performanceTally += 8;
+                else if (student.GetGrade(Scores) == 'D') performanceTally += 7;
             }
             decimal meanPerformancePoints = performanceTally / MyStudents.Count;
-            if (meanPerformancePoints < 7 || base.GetGrade(Scores) == 'D' || base.GetGrade(Scores) == 'E')  Grade = 'E';
-            else Grade = 'A';
-            return Grade;
+            if (meanPerformancePoints < 7 || base.GetGrade(Scores) == 'D' || base.GetGrade(Scores) == 'E')  return 'E';
+            else return 'A';
         }
         public void ScoreAStudent(Student _scoreStudent, int _newScore) => _scoreStudent.Scores.Add(_newScore);
         public override string ToString() => $"{Name}\t\tStatus: {Status}\t\tScores: {string.Join(", ", Scores)}\t\tGrade: {GetGrade(Students)}";
