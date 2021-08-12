@@ -145,10 +145,7 @@ namespace PracticeAssessment4
                     }
                     while (!quit);
                 }
-                else
-                {
-                    Console.WriteLine($"\n{foundUser}");
-                }
+                else Console.WriteLine($"\n{foundUser}");
             }
             while (KeepGoing());
         }
