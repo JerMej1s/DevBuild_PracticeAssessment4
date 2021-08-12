@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace PracticeAssessment4
 {
+    enum Status { Student, GradStudent }
     class Student
     {
         public string Name;
-        public int Status;
+        public Status Status;
         public List<int> Scores;
         public char Grade;
-        public Student(string _Name, int _Status, List<int> _Scores)
+        public Student(string _Name, Status _Status, List<int> _Scores)
         {
             Name = _Name;
             Status = _Status;
@@ -40,12 +41,12 @@ namespace PracticeAssessment4
             }
             return null;
         }
-        public override string ToString() => $"{Name}\tStatus: {Status}\tScores: {string.Join(", ", Scores)}\tGrade: {GetGrade(Scores)}";
+        public override string ToString() => $"{Name}\t\tStatus: {Status}\t\tScores: {string.Join(", ", Scores)}\t\tGrade: {GetGrade(Scores)}";
     }
     class GradStudent : Student
     {
         List<Student> Students = new List<Student>();
-        public GradStudent(string _Name, int _Status, List<int> _Scores, List<Student> _Students) : base(_Name, _Status, _Scores) => Students = _Students;
+        public GradStudent(string _Name, Status _Status, List<int> _Scores, List<Student> _Students) : base(_Name, _Status, _Scores) => Students = _Students;
         public char GetGrade(List<Student> MyStudents)
         {
             int performanceTally = 0;
@@ -62,7 +63,7 @@ namespace PracticeAssessment4
             return Grade;
         }
         public void ScoreAStudent(Student _scoreStudent, int _newScore) => _scoreStudent.Scores.Add(_newScore);
-        public override string ToString() => $"{Name}\tStatus: {Status}\tScores: {string.Join(", ", Scores)}\tGrade: {GetGrade(Students)}";
+        public override string ToString() => $"{Name}\t\tStatus: {Status}\t\tScores: {string.Join(", ", Scores)}\t\tGrade: {GetGrade(Students)}";
     }
     class Program
     {
@@ -92,12 +93,12 @@ namespace PracticeAssessment4
         {
             List<Student> AllStudents = new List<Student>();
 
-            Student student1 = new Student("Topanga Lawrence", 1, new List<int> { 80, 100 });  // Expect Grade: A
-            Student student2 = new Student("Cory Matthews", 1, new List<int> { 60, 100 });  // Expect Grade: B
-            Student student3 = new Student("Lisa Simpson", 1, new List<int> { 40, 100 });  // Expect Grade: C
-            Student student4 = new Student("Bart Simpson", 1, new List<int> { 20, 100 });  // Expect Grade: D
-            Student student5 = new Student("Ferris Bueller", 1, new List<int> { 19, 100 });  // Expect Grade: E
-            Student gradStudent1 = new GradStudent("Jeremy Jones", 2, new List<int> { 90, 100 }, new List<Student> { student1, student2, student3, student4, student5 });
+            Student student1 = new Student("Topanga Lawrence", Status.Student, new List<int> { 80, 100 });  // Expect Grade: A
+            Student student2 = new Student("Cory Matthews", Status.Student, new List<int> { 60, 100 });  // Expect Grade: B
+            Student student3 = new Student("Lisa Simpson", Status.Student, new List<int> { 40, 100 });  // Expect Grade: C
+            Student student4 = new Student("Bart Simpson", Status.Student, new List<int> { 20, 100 });  // Expect Grade: D
+            Student student5 = new Student("Ferris Bueller", Status.Student, new List<int> { 19, 100 });  // Expect Grade: E
+            Student gradStudent1 = new GradStudent("Jeremy Jones", Status.GradStudent, new List<int> { 90, 100 }, new List<Student> { student1, student2, student3, student4, student5 });
 
             AllStudents.Add(student1);
             AllStudents.Add(student2);
