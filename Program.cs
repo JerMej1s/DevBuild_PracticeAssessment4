@@ -45,10 +45,7 @@ namespace PracticeAssessment4
     class GradStudent : Student
     {
         List<Student> Students = new List<Student>();
-        public GradStudent(string _Name, int _Status, List<int> _Scores, List<Student> _Students) : base(_Name, _Status, _Scores)
-        {            
-            Students = _Students;
-        }
+        public GradStudent(string _Name, int _Status, List<int> _Scores, List<Student> _Students) : base(_Name, _Status, _Scores) => Students = _Students;
         public char GetGrade(List<Student> MyStudents)
         {
             int performanceTally = 0;
@@ -98,9 +95,9 @@ namespace PracticeAssessment4
             Student student1 = new Student("Topanga Lawrence", 1, new List<int> { 80, 100 });  // Expect Grade: A
             Student student2 = new Student("Cory Matthews", 1, new List<int> { 60, 100 });  // Expect Grade: B
             Student student3 = new Student("Lisa Simpson", 1, new List<int> { 40, 100 });  // Expect Grade: C
-            Student student4 = new Student("Bart Simpson", 1, new List<int> { 80, 100 });  // Expect Grade: D
-            Student student5 = new Student("Ferris Bueller", 1, new List<int> { 80, 100 });  // Expect Grade: E
-            Student gradStudent1 = new GradStudent("Jeremy Jones", 2, new List<int> { 40, 100 }, new List<Student> { student1, student2, student3, student4, student5 });
+            Student student4 = new Student("Bart Simpson", 1, new List<int> { 20, 100 });  // Expect Grade: D
+            Student student5 = new Student("Ferris Bueller", 1, new List<int> { 19, 100 });  // Expect Grade: E
+            Student gradStudent1 = new GradStudent("Jeremy Jones", 2, new List<int> { 90, 100 }, new List<Student> { student1, student2, student3, student4, student5 });
 
             AllStudents.Add(student1);
             AllStudents.Add(student2);
