@@ -57,11 +57,11 @@ namespace PracticeAssessment4
                 else if (student.Grade == 'D') performanceTally += 7;
             }
             decimal meanPerformancePoints = performanceTally / MyStudents.Count;
-            if (meanPerformancePoints < 7 || base.GetGrade(Scores) == 'D' || base.GetGrade(Scores) == 'E') Grade = 'E';
+            if (meanPerformancePoints < 7 || base.GetGrade(Scores) == 'D' || base.GetGrade(Scores) == 'E')  Grade = 'E';
             else Grade = 'A';
             return Grade;
         }
-        public static void ScoreAStudent(Student _scoreStudent, int _newScore) => _scoreStudent.Scores.Add(_newScore);
+        public void ScoreAStudent(Student _scoreStudent, int _newScore) => _scoreStudent.Scores.Add(_newScore);
         public override string ToString() => $"{Name}\tStatus: {Status}\tScores: {string.Join(", ", Scores)}\tGrade: {GetGrade(Students)}";
     }
     class Program
@@ -110,9 +110,10 @@ namespace PracticeAssessment4
             do
             {
                 Console.Write("\nTo log in, enter your name: ");
-                Student foundUser = Student.FindOne(AllStudents, Console.ReadLine());
-                if (foundUser is GradStudent)
+                Student user = Student.FindOne(AllStudents, Console.ReadLine());
+                if (user is GradStudent)
                 {
+                    GradStudent userGradStudent = user as GradStudent;
                     bool quit = false;
                     do
                     {
@@ -132,7 +133,7 @@ namespace PracticeAssessment4
                                 Console.Write($"\nEnter a score to assign to {scoreStudent.Name}: ");
                                 int newScore = int.Parse(Console.ReadLine());
 
-                                GradStudent.ScoreAStudent(scoreStudent, newScore);
+                                userGradStudent.ScoreAStudent(scoreStudent, newScore);
                                 Console.WriteLine($"\n{newScore} was added to {scoreStudent.Name}'s scores.");
                                 break;
                         }
@@ -142,7 +143,7 @@ namespace PracticeAssessment4
                     }
                     while (!quit);
                 }
-                else Console.WriteLine($"\n{foundUser}");
+                else Console.WriteLine($"\n{user}");
             }
             while (KeepGoing());
         }
